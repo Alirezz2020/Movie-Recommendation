@@ -1,0 +1,18 @@
+{# templates/home/home.html #}
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="home">
+    <h1>Welcome to Movie Recommendations!</h1>
+    <p>Discover movies tailored just for you. Enjoy exploring our curated collections and personalized recommendations.</p>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/script.js' %}"></script>
+{% endblock %}

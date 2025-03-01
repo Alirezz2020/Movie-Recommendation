@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Recommendations</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+
+
+
+    <nav>
+ 
+        <ul>
+             {% if user.is_authenticated %}
+             <li class="nav-item">
+                   <li> <a class="nav-link" href="{% url 'accounts:logout' %}">Logout</a></li>
+                 
+                   <li> <a class="nav-link" href="{% url 'accounts:profile' %}">Profile</a></li>
+                    <li><a href="{% url 'home:home' %}">Home</a></li>
+                    <li><a href="{% url 'movies:movie-list' %}">Movies</a></li>
+                </li>
+              {% else %}
+
+            <li><a href="{% url 'accounts:login' %}">Login</a></li>
+            <li><a href="{% url 'accounts:register' %}">Register</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+   <form method="GET" action="{% url 'movies:movie-search' %}">
+    <input type="text" name="q" placeholder="Search for a movie..." required>
+    <button type="submit">Search</button>
+</form>
+    <div class="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Movie Recommendations</p>
+    </footer>
+
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>
