@@ -16,15 +16,13 @@ class MovieDetailView(DetailView):
 
 def rate_movie(request, movie_id):
     movie = get_object_or_404(Movie, pk=movie_id)
-
     if request.method == 'POST':
-        rating = float(request.POST['rating'])
+        rating = float(request.POST.get('rating', 0))
         movie.update_rating(rating)
-        # Optionally, save the user's rating in a separate model (UserMovieRating)
-
-    return render(request, 'movies/movie_detail.html', {'movie': movie})
-
-
+        return redirect('movies:movie-detail', pk=movie.id)
+    else:
+        # Optionally, show the rating form if needed
+        return render(request, 'movies/movie_detail.html', {'movie': movie})
 
 
 
@@ -54,13 +52,15 @@ class WatchlistView(ListView):
 
 
 def add_to_watchlist(request, movie_id):
-    movie = get_object_or_404(Movie, pk=movie_id)
-    user_profile = request.user.profile
-
-    if movie in user_profile.saved_movies.all():
-        user_profile.saved_movies.remove(movie)
+    if request.method == 'POST':
+        movie = get_object_or_404(Movie, pk=movie_id)
+        user_profile = request.user.profile  # Adjust based on your user profile implementation
+        if movie in user_profile.saved_movies.all():
+            user_profile.saved_movies.remove(movie)
+        else:
+            user_profile.saved_movies.add(movie)
+        # Use 'pk' in kwargs when redirecting to the movie detail view
+        return redirect('movies:movie-detail', pk=movie.id)
     else:
-        user_profile.saved_movies.add(movie)
-
-    return redirect('movies:movie-detail', movie_id=movie.id)
-
+        # If not a POST, simply redirect to the movie detail view.
+        return redirect('movies:movie-detail', pk=movie_id)

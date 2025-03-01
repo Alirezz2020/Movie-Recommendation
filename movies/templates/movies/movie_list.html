@@ -3,13 +3,16 @@
 {% block content %}
     <h1>Movies</h1>
     <div class="movie-list">
-        {% for movie in movies %}
-            <div class="movie-item">
-                <a href="{% url 'movies:movie-detail' movie.pk %}">
-                    <img src="{{ movie.poster.url }}" alt="{{ movie.title }}">
-                    <h3>{{ movie.title }}</h3>
-                </a>
-            </div>
-        {% endfor %}
+        <!-- templates/movies/movie_list.html -->
+{% for movie in movies %}
+    <div class="movie-item">
+        <a href="{% url 'movies:movie-detail' movie.pk %}">
+            <!-- Use movie.poster directly because it's a URLField -->
+            <img src="{{ movie.poster }}" alt="{{ movie.title }}">
+            <h3>{{ movie.title }}</h3>
+        </a>
+    </div>
+{% endfor %}
+
     </div>
 {% endblock %}
