@@ -83,3 +83,15 @@ nav ul li a {
   color: #fff;
   margin-top: 10px;
 }
+.btn {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  margin: 10px 0;
+}
+
+.btn:hover {
+  background-color: #0056b3;
+}

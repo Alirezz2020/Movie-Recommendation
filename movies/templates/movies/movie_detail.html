@@ -9,6 +9,20 @@
     <p>Genre: {{ movie.genre }}</p>
     <p>Rating: {{ movie.rating }}</p>
 
+
+
+  {% if user.is_authenticated %}
+<form method="POST" action="{% url 'movies:add-to-watchlist' movie_id=movie.id %}">
+    {% csrf_token %}
+    <button type="submit">
+        {% if movie in user.profile.saved_movies.all %}
+            Remove from Watchlist
+        {% else %}
+            Add to Watchlist
+        {% endif %}
+    </button>
+</form>
+{% endif %}
     <!-- Rating form -->
     {% if user.is_authenticated %}
     <form method="POST" action="{% url 'movies:rate-movie' movie_id=movie.id %}">

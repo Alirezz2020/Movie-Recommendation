@@ -1,14 +1,16 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 {% block content %}
-    <h1>Recommended Just For You</h1>
-    <div class="recommendation-list">
-        {% for movie in recommended_movies %}
-            <div class="movie-item">
-                <a href="{% url 'movies:movie-detail' movie.pk %}">
-                    <img src="{{ movie.poster.url }}" alt="{{ movie.title }}">
-                    <h3>{{ movie.title }}</h3>
-                </a>
-            </div>
-        {% endfor %}
-    </div>
+  <h1>Your Personalized Recommendations</h1>
+  <div class="movie-list">
+    {% for movie in recommended_movies %}
+      <div class="movie-item">
+        <a href="{% url 'movies:movie-detail' pk=movie.pk %}">
+          <img src="{{ movie.poster }}" alt="{{ movie.title }}">
+          <h3>{{ movie.title }}</h3>
+        </a>
+      </div>
+    {% empty %}
+      <p>No personalized recommendations available. Please rate some movies to get started!</p>
+    {% endfor %}
+  </div>
 {% endblock %}

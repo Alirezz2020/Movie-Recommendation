@@ -1,109 +1,77 @@
-.env
-# Django
-*.log
-*.pot
-*.pyc
+# Byte-compiled / optimized / DLL files
 __pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Django stuff:
+*.log
+local_settings.py
 db.sqlite3
 db.sqlite3-journal
-local_settings.py
 
-# Virtual Environment
+# Django migrations (keep __init__.py files)
+*/migrations/*
+!*/migrations/__init__.py
+
+# Static files
+/staticfiles/
+*.pot
+
+# Media files (if you store user uploads locally)
+media/
+
+# Virtual environment
 .venv/
-venv/
-env/
-
-# Files that should not be ignored
-!migrations/
-
-# System files
-.DS_Store
-Thumbs.db
 
 # PyCharm
 .idea/
 
-# Other
-*.csv
-*.json
-*.sqlite3
-*.sqlite
-*.user
-*.xls
-*.xlsx
-_NOTES.txt
-__MACOSX
-*.mode1v3
-.settings.yml
-*.DartSass.json
-*.kceeditedfile*.kcktlk*
-*.backup
-*.rar
-*.tar.gz
-*.zip
-*.tar
-local_settings.py
-.csv
-.env*
-
-# Generated files
-dist/
-build/
-*.egg-info/
-
-# Node
-node_modules/
-npm-debug.log
-yarn-error.log
-package-lock.json
-yarn.lock
-package.json
-
-# Coverage
-.coverage
-htmlcov/
-coverage.xml
-
-# Python
-.project
-.pydevproject
-.settings/
-.pylint.d/
-
-# Buckminster
-.buckminster/
-
-# Django template
-AppData/
-
-# System
-ained/
-ip_ns
-.session
-
-# Dev
-CONADV
-CONADVP
-CONADVR
-CONADVS
-ELD
-FPDemo
-FX
-NSDATA
-VPdummy
-
-# Emails
-*.eml
-
-# Logs
-*.log
+# VSCode
+.vscode/
 
 # macOS
-__MACOSX/
-*.DS_Store
-.DS_Store/
-.AppleDouble/
-.LSOverride
+.DS_Store
 
-# Thumbnails
-.Thumbnails/
+# Windows
+Thumbs.db
+
+# Coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+.junit/
+test-results/
+
+# Translations
+*.mo
+
+# Sphinx documentation
+docs/_build/
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Environments
+.env

@@ -1,4 +1,26 @@
 
+# Movie Recommendation Django Project
+
+This is a Django-based movie recommendation system with a Netflix-style interface. The project includes the following apps:
+
+- **accounts:** User authentication and profile management.
+- **home:** Homepage with dynamic carousels for new and top movies.
+- **movies:** Handles movie listings, detail pages, watchlist management, and user ratings.
+- **recommendations:** Provides both general and personalized movie recommendations.
+
+## Features
+
+- **Movie Listings:** Display a list of movies fetched from an external API or dataset.
+- **Movie Details:** View detailed information for each movie, including poster, description, release date, and ratings.
+- **Watchlist:** Users can add movies to a personal watchlist.
+- **Ratings:** Each user can rate a movie once, and ratings are averaged to provide a general score.
+- **Recommendations:** 
+  - **General Recommendations:** Shows top-rated movies.
+  - **Personalized Recommendations:** Displays movies based on the user's watchlist (e.g., based on genre preferences).
+- **Dynamic Home Page:** The home page includes moving sections for "New Movies" and "Top Movies" that rotate every 5 seconds.
+
+
+
 
 ## Installation
 
