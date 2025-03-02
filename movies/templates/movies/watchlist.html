@@ -1,14 +1,22 @@
+<!-- templates/movies/watchlist.html -->
 {% extends "base.html" %}
 {% block content %}
   <h1>Your Watchlist</h1>
   {% if watchlist_movies %}
-    <ul>
+    <div class="watchlist-grid">
       {% for movie in watchlist_movies %}
-        <li>
-          <a href="{% url 'movies:movie-detail' movie.pk %}">{{ movie.title }}</a>
-        </li>
+        <div class="watchlist-item">
+          <a href="{% url 'movies:movie-detail' pk=movie.pk %}">
+            <img src="{{ movie.poster }}" alt="{{ movie.title }}" />
+            <h3>{{ movie.title }}</h3>
+          </a>
+          <form method="POST" action="{% url 'movies:add-to-watchlist' movie_id=movie.id %}">
+            {% csrf_token %}
+            <button type="submit">Remove from Watchlist</button>
+          </form>
+        </div>
       {% endfor %}
-    </ul>
+    </div>
   {% else %}
     <p>No movies in your watchlist yet. Start adding some!</p>
   {% endif %}

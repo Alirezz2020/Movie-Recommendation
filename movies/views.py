@@ -1,7 +1,8 @@
 from django.views.generic import ListView, DetailView
-from .models import Movie
+from decimal import Decimal
 from django.shortcuts import render, get_object_or_404
-
+from django.contrib import messages
+from movies.models import Movie, MovieRating
 from django.shortcuts import redirect
 class MovieListView(ListView):
     model = Movie
@@ -16,13 +17,31 @@ class MovieDetailView(DetailView):
 
 def rate_movie(request, movie_id):
     movie = get_object_or_404(Movie, pk=movie_id)
+
     if request.method == 'POST':
-        rating = float(request.POST.get('rating', 0))
-        movie.update_rating(rating)
-        return redirect('movies:movie-detail', pk=movie.id)
-    else:
-        # Optionally, show the rating form if needed
-        return render(request, 'movies/movie_detail.html', {'movie': movie})
+        if request.user.is_authenticated:
+            # Check if the user already rated this movie
+            if MovieRating.objects.filter(movie=movie, user=request.user).exists():
+                messages.error(request, "You have already rated this movie.")
+                return redirect('movies:movie-detail', pk=movie.id)
+            try:
+                rating_value = Decimal(request.POST.get('rating'))
+            except (TypeError, ValueError):
+                messages.error(request, "Invalid rating value.")
+                return redirect('movies:movie-detail', pk=movie.id)
+
+            # Create a new rating entry
+            MovieRating.objects.create(movie=movie, user=request.user, rating=rating_value)
+            # Update the movie's average rating
+            movie.update_average_rating()
+            messages.success(request, "Thank you for rating!")
+            return redirect('movies:movie-detail', pk=movie.id)
+        else:
+            messages.error(request, "Please log in to rate movies.")
+            return redirect('accounts:login')
+
+    # If GET request or other, simply redirect to detail page
+    return redirect('movies:movie-detail', pk=movie.id)
 
 
 

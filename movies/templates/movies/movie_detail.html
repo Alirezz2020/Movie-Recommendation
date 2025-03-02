@@ -1,33 +1,22 @@
-<!-- movie_detail.html -->
-{% extends 'base.html' %}
+<!-- templates/movies/movie_detail.html -->
+{% extends "base.html" %}
 {% block content %}
-    <div class="movie-detail">
-        <img src="{{ movie.poster.url }}" alt="{{ movie.title }}">
-        <h1>{{ movie.title }}</h1>
-        <p>{{ movie.description }}</p>
-        <p>Release Date: {{ movie.release_date }}</p>
-        <p>Genre: {{ movie.genre }}</p>
-        <p>Rating: {{ movie.rating }}</p>
-    </div>
-{% if user.is_authenticated %}
-<form method="POST" action="{% url 'movies:add-to-watchlist' movie_id=movie.id %}">
-    {% csrf_token %}
-    <button type="submit">
-        {% if movie in user.profile.saved_movies.all %}
-            Remove from Watchlist
-        {% else %}
-            Add to Watchlist
-        {% endif %}
-    </button>
-</form>
-{% endif %}
+  <div class="movie-detail">
+    <img src="{{ movie.poster }}" alt="{{ movie.title }}">
+    <h1>{{ movie.title }}</h1>
+    <p>{{ movie.description }}</p>
+    <p>Release Date: {{ movie.release_date }}</p>
+    <p>Genre: {{ movie.genre }}</p>
+    <p>Rating: {{ movie.rating }}</p>
 
-
-<form method="POST" action="{% url 'movies:rate-movie' movie_id=movie.id %}">
-    {% csrf_token %}
-    <label for="rating">Rate this movie:</label>
-    <input type="number" name="rating" min="1" max="5" step="0.1">
-    <button type="submit">Submit Rating</button>
-</form>
-
+    <!-- Rating form -->
+    {% if user.is_authenticated %}
+    <form method="POST" action="{% url 'movies:rate-movie' movie_id=movie.id %}">
+      {% csrf_token %}
+      <label for="rating">Rate this movie:</label>
+      <input type="number" name="rating" min="1" max="5" step="0.1">
+      <button type="submit">Submit Rating</button>
+    </form>
+    {% endif %}
+  </div>
 {% endblock %}

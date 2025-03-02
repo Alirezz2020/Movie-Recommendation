@@ -1,4 +1,3 @@
-{# templates/home/home.html #}
 {% extends "base.html" %}
 {% load static %}
 
@@ -7,10 +6,30 @@
 {% endblock %}
 
 {% block content %}
-<div class="home">
-    <h1>Welcome to Movie Recommendations!</h1>
-    <p>Discover movies tailored just for you. Enjoy exploring our curated collections and personalized recommendations.</p>
-</div>
+  <div class="carousel-container">
+    <h2>New Movies</h2>
+    <div class="carousel" id="newMoviesCarousel">
+      {% for movie in new_movies %}
+      <div class="carousel-item">
+        <img src="{{ movie.poster }}" alt="{{ movie.title }}">
+           <a href="{% url 'movies:movie-detail' pk=movie.pk %}">
+        <h3>{{ movie.title }}</h3></a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="carousel-container">
+    <h2>Top Movies</h2>
+    <div class="carousel" id="topMoviesCarousel">
+      {% for movie in top_movies %}
+      <div class="carousel-item">
+        <img src="{{ movie.poster }}" alt="{{ movie.title }}">
+        <h3>{{ movie.title }}</h3>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
 {% endblock %}
 
 {% block extra_js %}

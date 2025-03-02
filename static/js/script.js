@@ -30,3 +30,26 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log("Home page is loaded and ready!");
     // You can add further interactive behavior here.
 });
+document.addEventListener('DOMContentLoaded', function() {
+    function cycleCarousel(carouselId) {
+        let carousel = document.getElementById(carouselId);
+        if (!carousel) return;
+        let items = carousel.getElementsByClassName('carousel-item');
+        let currentIndex = 0;
+        // Hide all items except the first
+        for(let i = 0; i < items.length; i++){
+            items[i].style.display = 'none';
+        }
+        if(items.length > 0) {
+            items[0].style.display = 'block';
+        }
+        setInterval(function() {
+            items[currentIndex].style.display = 'none';
+            currentIndex = (currentIndex + 1) % items.length;
+            items[currentIndex].style.display = 'block';
+        }, 5000); // change every 5 seconds
+    }
+
+    cycleCarousel('newMoviesCarousel');
+    cycleCarousel('topMoviesCarousel');
+});

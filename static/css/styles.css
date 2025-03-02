@@ -53,3 +53,33 @@ nav ul li a {
     font-size: 1.2rem;
     color: #ccc;
 }
+.carousel-container {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.carousel {
+  position: relative;
+  height: 300px;
+  overflow: hidden;
+}
+
+.carousel-item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+}
+
+.carousel-item img {
+  max-height: 200px;
+  margin: auto;
+  display: block;
+}
+
+.carousel-item h3 {
+  color: #fff;
+  margin-top: 10px;
+}
